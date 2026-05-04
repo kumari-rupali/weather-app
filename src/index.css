@@ -6,8 +6,7 @@
   font-family: "Poppins", serif;
 }
 
-.app{
+.app {
   min-height: 100vh;
-  display: grid;
-  background: #def5f9;
+  width: 100%;
 }
