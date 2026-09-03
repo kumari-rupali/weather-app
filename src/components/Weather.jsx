@@ -78,16 +78,21 @@ const Weather = () => {
     setError(false);
     setSelectedDay(null); // Reset selection on new search
     try {
+      const apiKey = import.meta.env.VITE_APP_ID;
+      if (!apiKey) throw new Error("Weather API is not configured");
+
       const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
       );
       
-      if (!res.ok) throw new Error("City not found");
+      if (res.status === 404) throw new Error("City not found");
+      if (!res.ok) throw new Error("Weather service unavailable");
 
       const data = await res.json();
       const res2 = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${import.meta.env.VITE_APP_ID}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`
       );
+      if (!res2.ok) throw new Error("Hourly forecast unavailable");
       const data2 = await res2.json();
 
       const dailyRes = await fetch(
@@ -153,7 +158,7 @@ const Weather = () => {
 
     } catch (err) {
       console.log("Error fetching data:", err);
-      setError(true);
+      setError(err.message || "Weather data unavailable");
       setWeather(null);
     } finally {
       setLoading(false);
@@ -228,7 +233,7 @@ const Weather = () => {
         </div>
 
         {loading && <div className="loading-spinner fade-in">Loading weather data...</div>}
-        {error && <div className="error-message fade-in">City not found. Please try again.</div>}
+        {error && <div className="error-message fade-in">{error}</div>}
         {!loading && !error && !displayData && (
           <div className="empty-state fade-in">
             <p>Search for a city to view live weather.</p>

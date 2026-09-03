@@ -50,6 +50,16 @@ A responsive React weather dashboard that shows live current conditions, hourly 
 
 The home page opens with a search field. Search for a city to open its weather route.
 
+### Netlify deployment
+
+Add the same environment variable in Netlify before deploying:
+
+1. Open **Site configuration > Environment variables**.
+2. Add `VITE_APP_ID` with your OpenWeather API key.
+3. Trigger **Deploys > Redeploy** so Vite can include the variable in the production build.
+
+Node.js 18 or newer is supported. The API key must be available during the build; changing the Node.js version does not replace the environment variable.
+
 ## Routes
 
 | Route | Description |
