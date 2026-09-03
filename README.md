@@ -9,6 +9,12 @@ Currently, two official plugins are available:
 
 A responsive React weather dashboard that shows live current conditions, hourly data, and a seven-day forecast for any searched city.
 
+**Live project:** [skyweather-pulse.netlify.app](https://skyweather-pulse.netlify.app/)
+
+> <img width="324" height="733" alt="image" src="https://github.com/user-attachments/assets/17a41ebd-2ada-4697-a027-479ef95912ca" />
+
+> <img width="1588" height="796" alt="image" src="https://github.com/user-attachments/assets/e6de0d82-5045-4651-8326-f4a4c1a20202" />
+
 ## Features
 
 - Live current weather data from OpenWeather
